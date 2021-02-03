@@ -1,0 +1,141 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "电商平台，api接口站的文档内容.",
+        "title": "电商接口站文档",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "371125307@qq.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "api.estorelhd.com",
+    "paths": {
+        "/index/goodslist": {
+            "get": {
+                "description": "显示商品列表",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "商品列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类id",
+                        "name": "categoryId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/swag.ResultContGoodsList"
+                        }
+                    }
+                }
+            }
+        },
+        "/index/goodsone/{goodsid}": {
+            "get": {
+                "description": "显示商品的详情",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "商品详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "商品id",
+                        "name": "goodsid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/swag.ResultContGoods"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Goods": {
+            "type": "object",
+            "properties": {
+                "goodsId": {
+                    "description": "商品id",
+                    "type": "integer"
+                },
+                "goodsName": {
+                    "description": "商品名字",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "商品价格",
+                    "type": "string"
+                },
+                "stock": {
+                    "description": "商品库存",
+                    "type": "integer"
+                },
+                "subject": {
+                    "description": "商品描述",
+                    "type": "string"
+                }
+            }
+        },
+        "swag.ResultContGoods": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "代码,0:成功，非0:失败",
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "description": "返回的数据",
+                    "$ref": "#/definitions/model.Goods"
+                },
+                "msg": {
+                    "description": "报错信息",
+                    "type": "string",
+                    "example": "错误"
+                }
+            }
+        },
+        "swag.ResultContGoodsList": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "代码,0:成功，非0:失败",
+                    "type": "integer",
+                    "example": 0
+                },
+                "data": {
+                    "description": "商品列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Goods"
+                    }
+                },
+                "msg": {
+                    "description": "报错信息",
+                    "type": "string",
+                    "example": "错误"
+                }
+            }
+        }
+    }
+}
